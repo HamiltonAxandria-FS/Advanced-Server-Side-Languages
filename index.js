@@ -1,22 +1,17 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended: false}))
+const productRouter = require('./routes/Products')
+app.set(`views`,__dirname + `/templates/views`)
+app.set('view engine', 'twig')
 
-app.get('/products/all', (request, response) => {
-    response.send(` 
-        GET Products: ${request.get('Page')}, ${request.get('Sort')}, ${request.get('Order')}
-    `)
+app.get('/', (req,res) => {
+    res.render("home")
 })
 
-app.get('/products/:id', (request, response) => {
-    response.send(`
-        GET Products: ${request.params.id}
-    `)
-})
+app.use("/products", productRouter)
 
-app.get('/products/:id-:size-:color', (request, response) => {
-    response.send(`
-        GET Products: ${request.params.id}, ${request.params.size}, ${request.params.color}
-    `)
-})
+
 
 app.listen(3000)
