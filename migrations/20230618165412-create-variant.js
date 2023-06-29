@@ -15,6 +15,18 @@ module.exports = {
       price: {
         type: Sequelize.FLOAT
       },
+      slug: {
+        type: Sequelize.STRING
+      },
+      inventory: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
       productId: { 
        type: Sequelize.INTEGER,
        allowNull: true
